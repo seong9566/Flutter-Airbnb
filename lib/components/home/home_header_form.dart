@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
+// ctrl + shift + f : 전역으로 코드 검색
 class HomeHeaderForm extends StatelessWidget {
   const HomeHeaderForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //나중에 완성 하기
     return Align(
       alignment: Alignment(-0.6, 0),
       child: Container(
