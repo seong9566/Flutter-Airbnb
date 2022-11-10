@@ -1,42 +1,110 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_airbnb/components/common/common_form_field.dart';
+import 'package:flutter_airbnb/constants.dart';
+import 'package:flutter_airbnb/size.dart';
+import 'package:flutter_airbnb/styles.dart';
 
-// ctrl + shift + f : 전역으로 코드 검색
 class HomeHeaderForm extends StatelessWidget {
   const HomeHeaderForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment(-0.6, 0),
-      child: Container(
-        //color: Colors.white  여기에 색깔을 주면 Decoration이 안먹음
-        width: 420,
-        height: 200,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
+    double screenWidth = MediaQuery.of(context).size.width;
+    return Padding(
+      padding: const EdgeInsets.only(top: gap_m),
+      child: Align(
+        alignment: screenWidth < 520 ? Alignment(0, 0) : Alignment(-0.6, 0),
+        child: Container(
+          width: 420,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Form(
+            child: Padding(
+              padding: const EdgeInsets.all(gap_l),
+              child: Column(
+                children: [
+                  _buildFormTitle(),
+                  _buildFormField(),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  _buildFormSubmit(),
+                ],
+              ),
+            ),
+          ),
         ),
-        child: Form(
-            child: Column(
-          children: [
-            _buildFormTitle(),
-            _buildFormField(),
-            _buildFormSubmit(),
-          ],
-        )),
       ),
     );
   }
 
   Widget _buildFormTitle() {
-    return SizedBox();
+    return Column(
+      children: [
+        Text(
+          "모두의 숙소에서 숙소를 검색하세요.",
+          style: h4(),
+        ),
+        SizedBox(
+          height: gap_xs,
+        ),
+        Text(
+          "혼자하는 여행에 적합한 개인실부터 여럿이 함께하는 여행에 좋은 '공간전체' 숙소까지, 모두의 숙소에 다 있습니다.",
+          style: body1(),
+        ),
+        SizedBox(
+          height: gap_m,
+        ),
+      ],
+    );
   }
 
   Widget _buildFormField() {
-    return SizedBox();
+    return Column(
+      // Column은 height가 필요하다. 없으면 사이즈를 안잡아준다.
+      children: [
+        CommonFormFiled(prefixText: "위치", hintText: "근처 추천 장소"),
+        SizedBox(height: gap_s),
+        Row(
+          // Row는 width가 필요하다. 없으면 사이즈를 안잡아준다.
+          children: [
+            Expanded(
+                child: CommonFormFiled(prefixText: "체크인", hintText: "체크 아웃")),
+            Expanded(
+                child: CommonFormFiled(prefixText: "날짜 입력", hintText: "날짜 입력"))
+          ],
+        ),
+        SizedBox(height: gap_s),
+        Row(
+          // Row는 width가 필요하다. 없으면 사이즈를 안잡아준다.
+          children: [
+            Expanded(child: CommonFormFiled(prefixText: "성인", hintText: "어린이")),
+            Expanded(child: CommonFormFiled(prefixText: "2", hintText: "0"))
+          ],
+        ),
+      ],
+    );
   }
 
+  //TextButton, OutlinedButton,ElevatedButton,InkWell+Container
   Widget _buildFormSubmit() {
-    return SizedBox();
+    return SizedBox(
+      width: double.infinity,
+      height: 50,
+      child: TextButton(
+        style: TextButton.styleFrom(
+            backgroundColor: kAccentColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            )),
+        onPressed: () {},
+        child: Text(
+          "검색",
+          style: subtitle1(mColor: Colors.white),
+        ),
+      ),
+    );
   }
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_airbnb/components/common/logo.dart';
+import 'package:flutter_airbnb/constants.dart';
 import 'package:flutter_airbnb/size.dart';
+import 'package:flutter_airbnb/styles.dart';
 
 class HomeHeaderAppBar extends StatelessWidget {
   const HomeHeaderAppBar({Key? key}) : super(key: key);
@@ -18,13 +21,25 @@ class HomeHeaderAppBar extends StatelessWidget {
     );
   }
 
-  // 함수는 클래스 외부에 ( 1급객체 )
-  // 메서드는 클래스 내부에
   Widget _buildAppBarLogo() {
-    return SizedBox();
+    return Row(
+      children: [
+        Logo(),
+        Text("RoomOfAll", style: subtitle1(mColor: Colors.white)),
+      ],
+    );
   }
+}
 
-  Widget _buildAppBarMenu() {
-    return SizedBox();
-  }
+Widget _buildAppBarMenu() {
+  return Row(
+    children: [
+      Text("회원가입", style: subtitle1(mColor: Colors.white)),
+      SizedBox(width: gap_m),
+      Text(
+        "로그인",
+        style: subtitle1(mColor: Colors.white),
+      )
+    ],
+  );
 }
